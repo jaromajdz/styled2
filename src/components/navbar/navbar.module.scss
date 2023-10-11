@@ -1,0 +1,14 @@
+.nav {
+    @apply flex h-16 w-full bg-background-200 shadow-md;
+.logo{
+   flex-grow: 3;
+}
+.menu{
+    @apply flex;
+    flex-grow: 6;
+    flex-shrink: 2;
+}
+.others{
+    flex-grow: 1;
+}
+}
