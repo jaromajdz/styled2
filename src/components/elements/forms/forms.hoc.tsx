@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { FormConfigT, FormControlErrorT, FormControlT } from "./form.control"
+import { FormConfigT, FormControlErrorT, FormControlT } from "./form.types"
 
 
 export const useForm = (formConfig: FormConfigT)=>{

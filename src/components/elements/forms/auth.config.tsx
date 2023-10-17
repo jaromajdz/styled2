@@ -1,4 +1,4 @@
-import { FormControlConfigT, FormControlTypesT, elementTypesEnum , FormValidationT, FormConfigT} from "./form.control";
+import { FormControlConfigT, FormControlTypesT, elementTypesEnum , FormValidationT, FormConfigT} from "./form.types";
 
 
 
@@ -26,7 +26,7 @@ export const authFormConfig: FormConfigT = {
          validators: [
             {
                 name: 'required',
-                validatorFunction: (value: string)=>(value===undefined || value===null),
+                validatorFunction: (value: string)=>(value===undefined || value===""),
                 errorMessage: "Password is required."        
              },
              {

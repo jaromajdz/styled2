@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Input from "../../input/input";
-import {FormConfigT, FormControlConfigT, FormControlErrorT, FormControlT, elementTypesEnum } from "../form.control";
+import {FormConfigT, FormControlConfigT, FormControlErrorT, FormControlT, elementTypesEnum } from "../form.types";
 import { useForm } from "../forms.hoc";
 
 
@@ -49,7 +49,7 @@ export const Form: React.FC<{formConfig: FormConfigT}> = ({formConfig}) =>{
             ({...prev, [id]: {...prev[id], value: value, touched: true, errors: errors? [...errors] : []} }))
          
          setFormTouched(true)
-         setFormValid(errors.length? false : true)
+         setFormValid(prev=>!errors.length && prev)
            
         }
  
@@ -123,5 +123,7 @@ export const Form: React.FC<{formConfig: FormConfigT}> = ({formConfig}) =>{
                                 }
                         </div>
                     </>
-            })}</form>
+            })}
+            
+            </form>
 }

@@ -1,6 +1,6 @@
 import tinycolor from 'tinycolor2';
-import { Color, TailwindTheme } from './theme.types';
-import {themes} from './themes-config';
+import { Color, TailwindTheme, ThemeT } from './theme.types';
+import {themes} from './themes.config';
 
 export function computeColorPalette(hex: string): Color[] {
 	return [
@@ -35,6 +35,28 @@ export function updateThemeVariables(theme: TailwindTheme, document: Document) {
 		}
 	}
 }
+
+export function updateStyledTheme() {
+	let generatedTheme: ThemeT  = {};
+  
+	for(const theme in themes){	
+		generatedTheme[theme] = {}
+
+	for (const[ name , color  ]of Object.entries(themes[theme as keyof typeof themes])) {
+		generatedTheme[theme][name] = {}
+		const palette = computeColorPalette(color)
+		for(const variant of palette){
+			generatedTheme[theme][name][variant.name] = variant.rgb	
+		}
+	}
+  }
+	
+ 	 console.log('generated theme', generatedTheme)
+	
+	return generatedTheme
+}
+
+
 
 export function addThemeSettings(themeName = "light"){
     updateThemeVariables(themes[themeName as keyof typeof themes], window.document);

@@ -11,3 +11,9 @@ export interface TailwindTheme {
 	'secondary-color': string;
 	'accent-color': string;
 }
+
+
+
+export interface ThemeT {
+	[key: string]: {[key: string]:  {[key: string]: string}} 
+}
