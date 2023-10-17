@@ -1,6 +1,6 @@
 import tinycolor from 'tinycolor2';
 import { Color, TailwindTheme } from './theme.types';
-import {themes} from './themes-config';
+import {themes} from './themes.config';
 
 export function computeColorPalette(hex: string): Color[] {
 	return [
