@@ -1,0 +1,13 @@
+.input_wrapper {
+    @apply relative m-2  mt-3;
+
+    .input {
+        @apply appearance-none relative z-30 focus:outline-none focus:border-secondary-300 border-solid border-b-2 border-primary-300 bg-transparent m-3 px-1;
+        
+    }
+    
+
+    .label {
+        @apply absolute top-0  z-40 left-[16px] transition-all duration-200;
+    }
+}
