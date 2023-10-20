@@ -1,0 +1,11 @@
+.action_area{
+    display: flex;
+    justify-content: center;
+}
+.error{
+    color: darken($color: #ff0000, $amount: 30);
+    font-size: 0.7rem;
+    min-height: 28px;
+    overflow-wrap: break-word;
+    margin-bottom: 32px;
+}

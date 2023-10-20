@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.scss";
 import NavBar from "./components/navbar/navbar";
 import { addThemeSettings, updateStyledTheme } from "./themes/theme.configuration";
@@ -9,7 +9,9 @@ import { Route, Routes, useLocation, useOutlet } from "react-router-dom";
 import { Home } from "./components/home/home";
 import { UserAuth } from "./components/userauth/userauth";
 import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "twin.macro";
+import { GlobalStyles } from "./themes/globla.theme";
+import { ThemeT } from "./themes/theme.types";
+
 
 
 
@@ -19,26 +21,20 @@ interface ActiveProps {
 
 function App() {
   const location = useLocation();
-  
-  const themes = updateStyledTheme();
-
+  const [theme, setTheme] =  useState(updateStyledTheme())
 
   useEffect(() => {
-    updateStyledTheme();
     addThemeSettings();
   }, []);
 
   return (
     <>
-     <ThemeProvider theme={themes.light}> 
+     <ThemeProvider theme={theme.light}>
       <GlobalStyles/>
       <NavBar></NavBar>
       <Container>
        
       
-      <TransitionGroup component={null}>
-      <CSSTransition key={location.key} classNames="page" timeout={300}>
-          
           <Routes location={location}>                     
                 <Route path="/" Component={Home}></Route>
                 <Route path="/login" Component={UserAuth}></Route>
@@ -46,11 +42,10 @@ function App() {
           </Routes>      
           
 
-        </CSSTransition>
-        </TransitionGroup>
+        
       
       </Container>
-      </ThemeProvider>
+      </ThemeProvider>      
     </>
   );
 }

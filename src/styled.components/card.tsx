@@ -2,9 +2,22 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 
-export const Card = tw.div`
-   flex shadow-md bg-background-100  flex-col min-h-[300px] min-w-[500px]
+export const Card = styled.div`
+   display: flex;
+   flex-direction: column;
+   box-shadow: 0px 0px 12px -8px rgba(66, 68, 90, 1);
+   min-height: 300px;
+   min-width: 500px;
 `
-export const CardHeader = tw.div`
-   flex justify-center text-2xl
-`
+export const CardHeader = styled.div`
+   display: flex;
+   justify-content: start;
+   background-color: ${({theme})=>theme.background['100']};
+   h1{
+     
+      padding: 8px 16px;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+   }
+   `

@@ -1,14 +1,30 @@
 import styled from 'styled-components';
-import tw from 'twin.macro';
+
 
 interface NavProps {
+    
     isActive?: boolean;
     noBackground?: boolean;
 }
 
 const NavLink  = styled.a<NavProps>`
-${tw`flex  items-center justify-center min-w-[70px] h-full md:min-w-[140px]  hover:bg-secondary-500 hover:text-background-100 text-foreground-500`}
-${(props)=> !props.noBackground && tw`bg-background-100`}
-${(props)=> props.isActive && tw`bg-foreground-400 hover:bg-foreground-400 text-background-100`}
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100%;
+min-width: 100px;
+text-decoration: none;
+${({theme, color, isActive, noBackground})=>{
+
+return `
+background-color: ${isActive? theme.foreground['400'] : noBackground? 'transparent' :  theme.background['50']};
+color: ${isActive?  'white' : theme.secondary['800']};
+&:hover{
+  background-color:  ${isActive? theme.foreground['400'] : noBackground? 'transparent' : theme.secondary['500']};
+  color: ${isActive? 'white' : noBackground? theme.secondary['600'] : theme.background['100']};  
+}
+`
+}}
+
 `
 export default NavLink;

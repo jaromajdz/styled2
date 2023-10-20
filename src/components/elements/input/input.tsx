@@ -5,28 +5,19 @@ import {
   InputHTMLAttributes,
   ChangeEvent,
 } from "react";
-import tw from "twin.macro";
+import { StyledInput } from "../../../styled.components/input";
+import styles from './input.module.scss';
+
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   value?: string;
   type: string;
   valid?: boolean;
+  width?: string;
   getValue?: (value: string) => void;
   getFocus?: (evn: 'focus' | 'blur')=>void
 }
-
-const StyledInput = tw.input`
-    appearance-none 
-    relative 
-    z-20 
-    focus:outline-none 
-    focus:border-secondary-300 
-    border-solid 
-    border-b-2 
-    border-primary-300 
-    bg-transparent
-    px-1`;
 
 export const Input = (props: InputProps) => {
   const inputRef = createRef<HTMLInputElement>();
@@ -77,31 +68,35 @@ export const Input = (props: InputProps) => {
   }, [focus, move]);
 
   return (
-    <div className="flex flex-col">
+    <div className={styles.input_wrapper}>
       <span style={{ height: `${height}px` }} className="relative m-2  mt-3">
         <StyledInput
           ref={inputRef}
           className=""
           placeholder=" "
+          width={"250px"}          
+          name={props.label}
+          title={props.label}
           
           value={props.value}
           type={props.type}
-    
+          
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleGetValue}
 
         />
-        <span
+        <label
           style={{
             top: `-${move ? size + 6 : 0}px`,
             left: `${move ? -3 : 4}px`,
             fontSize: `${size}px`,
           }}
-          className={`absolute z-10 transition-all duration-200`}
+          className={styles.label}
+          htmlFor={props.label}
         >
           {props.label}
-        </span>
+        </label>
       </span>
     </div>
   );

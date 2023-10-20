@@ -5,7 +5,10 @@ import { Form } from "../elements/forms/form/form"
 
 export const Home = () =>{
     return <section>
-        <Card><CardHeader>Tutaj jakis Tekst</CardHeader><Button  width={150}>Try for free</Button></Card>
-        <Form formConfig={authFormConfig}></Form>
+        <Card>
+            <CardHeader><h1>Tutaj jakis Tekst</h1></CardHeader>
+            <Button  width={150}>Try for free</Button>
+        </Card>
+        
     </section>
 }

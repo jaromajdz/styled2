@@ -60,4 +60,4 @@ export interface FormValidationT {
     }
 
  
- export type FormConfigT = Record<string, FormControlConfigT>
+ export type FormConfigT = {[key:string]: FormControlConfigT}
