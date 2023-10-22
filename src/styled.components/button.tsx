@@ -12,15 +12,16 @@ interface ButtonProps {
 
 export const Button = styled.button<ButtonProps>`
     all: unset;
+    text-decoration: none;
     text-align: center;
     padding: 8px;
     width: ${({width})=>(`${width? width : '100' }px`)};
-    background-color: ${({theme, color})=>theme[color? color : 'primary']['300']};
     ${({theme, color})=>{
     const thisColor = theme[color? color : 'primary']['300']; 
     const textColor = 'foreground'? 'white' : thisColor
     return `
-    color: ${theme.secondary['00']};
+    background-color: ${this};
+    color: ${theme.secondary['300']};
     &:hover:not([disabled]){
         background-color: ${tinycolor(thisColor).darken(10).toString()};
         color: ${tinycolor(thisColor).lighten(60).toString()};

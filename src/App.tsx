@@ -1,50 +1,57 @@
 
-import { useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import "./App.scss";
 import NavBar from "./components/navbar/navbar";
-import { addThemeSettings, updateStyledTheme } from "./themes/theme.configuration";
+import { updateStyledTheme } from "./themes/theme.configuration";
 import { Container } from "./styled.components/container";
-import { CSSTransition, SwitchTransition, TransitionGroup } from "react-transition-group";
 import { Route, Routes, useLocation, useOutlet } from "react-router-dom";
 import { Home } from "./components/home/home";
 import { UserAuth } from "./components/userauth/userauth";
-import { ThemeProvider } from "styled-components";
+import { ThemeContext, ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./themes/globla.theme";
-import { ThemeT } from "./themes/theme.types";
+import  { ThemesList }  from "./components/themesettings/themesettings";
+import { themes } from "./themes/themes.config";
+import { useStoreThemeName } from "./themes/theme.store";
 
-
-
-
-interface ActiveProps {
-  isActive?: boolean;
-}
+export const ThemeNameContext = createContext<{themeName: string, setThemeName: (name: string)=>void}>({
+  themeName: "light",
+  setThemeName: ()=>0
+});
 
 function App() {
-  const location = useLocation();
+
+  const [ storeThemeName, getTheme] = useStoreThemeName('light')
+  const [themeName, setThemeName] =  useState(getTheme())
   const [theme, setTheme] =  useState(updateStyledTheme())
+  const value = {themeName: themeName, setThemeName: (name: string)=>{
+    setThemeName(name)
+    storeThemeName(name)
+  }}
 
-  useEffect(() => {
-    addThemeSettings();
-  }, []);
+  const themeContext = useContext(ThemeContext)
 
+
+  
   return (
     <>
-     <ThemeProvider theme={theme.light}>
+     <ThemeProvider theme={theme[themeName]}>
+      <ThemeNameContext.Provider value={value}>
       <GlobalStyles/>
       <NavBar></NavBar>
-      <Container>
-       
       
-          <Routes location={location}>                     
+      <Container>
+    
+      
+          <Routes>                     
                 <Route path="/" Component={Home}></Route>
                 <Route path="/login" Component={UserAuth}></Route>
-          
+                <Route path="/themes" element={<ThemesList themes={themes}/>}></Route>  
           </Routes>      
           
-
-        
+    
       
       </Container>
+      </ThemeNameContext.Provider>
       </ThemeProvider>      
     </>
   );

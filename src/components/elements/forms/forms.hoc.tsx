@@ -95,11 +95,23 @@ export const useForm = (formConfig: FormConfigT)=>{
         setFormTouched(false);
         setFormValid(false);
       };
-    
+      
+      const getFormTouched= () =>{
+        return formTouched
+      }
+
+      const getFormValid =()=>{
+        return formValid
+      }
+
+      const getForm = () =>{
+        return form
+      }
+
       return [buildForm,
         handleResetForm,
-        handleOnChange,
-        handleSendForm] as const;
+        handleOnChange, handleOnFocus,
+        handleSendForm, getFormTouched, getFormValid, getForm] as const;
         
         
 }    

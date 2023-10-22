@@ -5,12 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { updateStyledTheme } from './themes/theme.configuration';
-import { generatedTeheme } from './themes/themes.config';
-
-const Hoc = ()=>{
-  //const theme = updateStyledTheme()
-  return <App />
-}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

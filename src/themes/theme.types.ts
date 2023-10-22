@@ -13,6 +13,13 @@ export interface TailwindTheme {
 	'accent-color': string;
 }
 
+export interface ThemeColortT {
+	"background": string;
+	'foreground': string;
+	'primary': string;
+	'secondary': string;
+	'accent': string;
+}
 
 
 export interface ThemeT {

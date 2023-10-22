@@ -4,9 +4,11 @@ import {
   useEffect,
   InputHTMLAttributes,
   ChangeEvent,
+  useContext
 } from "react";
 import { StyledInput } from "../../../styled.components/input";
 import styles from './input.module.scss';
+import { ThemeContext } from "styled-components";
 
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -29,6 +31,8 @@ export const Input = (props: InputProps) => {
         .getPropertyValue("font-size")
     );
   };
+
+  const themeData = useContext(ThemeContext) || {}
 
   const [focus, setFous] = useState(false);
   const [value, setValue] = useState("");
@@ -91,6 +95,7 @@ export const Input = (props: InputProps) => {
             top: `-${move ? size + 6 : 0}px`,
             left: `${move ? -3 : 4}px`,
             fontSize: `${size}px`,
+            color: `${themeData.primary['300']}`
           }}
           className={styles.label}
           htmlFor={props.label}

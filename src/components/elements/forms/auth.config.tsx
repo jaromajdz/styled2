@@ -31,8 +31,11 @@ export const authFormConfig: FormConfigT = {
              },
              {
                 name: 'minLength',
-                validatorFunction: (value: string)=>(value.length<8),
-                errorMessage: "Password should contain minimum 8 characters."
+                validatorFunction: (value: string)=>{
+                  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+                  return !regex.test(value)
+               },
+                errorMessage: "Password should contain minimum eight characters, at least one letter, one number and one special character."
              }
             ]
        },

@@ -1,10 +1,12 @@
 .nav {
+    position: fixed;
+    z-index: 100;
     @apply flex h-16 w-full bg-background-200 shadow-md;
 .logo{
    flex-grow: 3;
 }
 .menu{
-    @apply flex;
+    display: flex;
     flex-grow: 6;
     flex-shrink: 2;
 }

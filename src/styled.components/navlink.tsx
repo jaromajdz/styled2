@@ -18,10 +18,10 @@ ${({theme, color, isActive, noBackground})=>{
 
 return `
 background-color: ${isActive? theme.foreground['400'] : noBackground? 'transparent' :  theme.background['50']};
-color: ${isActive?  'white' : theme.secondary['800']};
+color: ${isActive?  theme.background['400'] : theme.secondary['800']};
 &:hover{
   background-color:  ${isActive? theme.foreground['400'] : noBackground? 'transparent' : theme.secondary['500']};
-  color: ${isActive? 'white' : noBackground? theme.secondary['600'] : theme.background['100']};  
+  color: ${isActive? theme.background['400'] : noBackground? theme.secondary['300'] : theme.background['100']};  
 }
 `
 }}
