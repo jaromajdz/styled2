@@ -14,11 +14,11 @@ export const ButtonColors = (theme: {[key: string]: {[key: string]: string}}, co
     const btn = {
         'primary': {
             background: theme.primary['400'],
-            text: theme.background['100']
+            text: theme.background['50']
         }, 
         'secondary': {
             background: theme.secondary['400'],
-            text: theme.background['100']
+            text: theme.accent['50']
         },
         'background': {
             background: theme.background['400'],
@@ -47,14 +47,14 @@ export const Button = styled.button<ButtonProps>`
     const btnColor = ButtonColors(theme, color)
 
     return `
-    background-color: ${this};
-    color: ${theme.secondary['300']};
+    background-color: ${btnColor?.background};
+    color: ${btnColor?.text};
     &:hover:not([disabled]){
         background-color: ${tinycolor(btnColor?.background).darken(10).toString()};
         color: ${tinycolor(btnColor?.text).lighten(60).toString()};
     }
     &:disabled{
-        background-color: ${tinycolor(btnColor?.background).lighten(10).toString()}; 
+        background-color: ${tinycolor(btnColor?.background).lighten(20).toString()}; 
         color: ${tinycolor(btnColor?.text).lighten(30).toString()} ;
         cursor: not-allowed;
     }`}
