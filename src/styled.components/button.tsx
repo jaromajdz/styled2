@@ -10,6 +10,32 @@ interface ButtonProps {
     textColor?: ColorT;
 }
 
+export const ButtonColors = (theme: {[key: string]: {[key: string]: string}}, color = "primary") =>{
+    const btn = {
+        'primary': {
+            background: theme.primary['400'],
+            text: theme.background['100']
+        }, 
+        'secondary': {
+            background: theme.secondary['400'],
+            text: theme.background['100']
+        },
+        'background': {
+            background: theme.background['400'],
+            text: theme.foreground['100']
+        },
+        'foreground': {
+            background: theme.foreground['400'],
+            text: theme.background['100']
+        },
+        'accent': {
+            background: theme.accent['400'],
+            text: theme.background['100']
+        },
+    }[color]
+    return btn
+} 
+
 export const Button = styled.button<ButtonProps>`
     all: unset;
     text-decoration: none;
@@ -17,18 +43,19 @@ export const Button = styled.button<ButtonProps>`
     padding: 8px;
     width: ${({width})=>(`${width? width : '100' }px`)};
     ${({theme, color})=>{
-    const thisColor = theme[color? color : 'primary']['300']; 
-    const textColor = 'foreground'? 'white' : thisColor
+    
+    const btnColor = ButtonColors(theme, color)
+
     return `
     background-color: ${this};
     color: ${theme.secondary['300']};
     &:hover:not([disabled]){
-        background-color: ${tinycolor(thisColor).darken(10).toString()};
-        color: ${tinycolor(thisColor).lighten(60).toString()};
+        background-color: ${tinycolor(btnColor?.background).darken(10).toString()};
+        color: ${tinycolor(btnColor?.text).lighten(60).toString()};
     }
     &:disabled{
-        background-color: ${tinycolor(thisColor).lighten(10).toString()}; 
-        color: ${tinycolor(thisColor).lighten(30).toString()} ;
+        background-color: ${tinycolor(btnColor?.background).lighten(10).toString()}; 
+        color: ${tinycolor(btnColor?.text).lighten(30).toString()} ;
         cursor: not-allowed;
     }`}
     
