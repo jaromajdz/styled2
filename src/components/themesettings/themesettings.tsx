@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Card, CardHeader } from "../../styled.components/card";
 import { ColorBox } from "../../styled.components/colorbox";
-import { TailwindTheme } from "../../themes/theme.types";
+import { ThemeColorT } from "../../themes/theme.types";
 import styles from "./themesettings.module.scss";
 import { ThemeNameContext } from "../../App";
 import { ThemeContext } from "styled-components";
@@ -13,7 +13,7 @@ export const ThemeSettings = ({
   themeName,
   active
 }: {
-  theme: TailwindTheme;
+  theme: ThemeColorT;
   themeName: string;
   active: boolean;
 }) => {
@@ -34,9 +34,9 @@ return (
       <div className={styles.container}>
         {Object.keys(theme).map((color) => (
           <>
-            <ColorBox color={theme[color as keyof TailwindTheme]}></ColorBox>
+            <ColorBox color={theme[color as keyof ThemeColorT]}></ColorBox>
             <div>{color} </div>
-            <div>{theme[color as keyof TailwindTheme]}</div>
+            <div>{theme[color as keyof ThemeColorT]}</div>
           </>
         ))}
       </div>
@@ -50,7 +50,7 @@ return (
 export const ThemesList = ({
   themes,
 }: {
-  themes: { [theme: string]: TailwindTheme };
+  themes: { [theme: string]: ThemeColorT };
 }) => {
     const themeContext = useContext(ThemeNameContext);
 

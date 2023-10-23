@@ -1,4 +1,4 @@
-import { TailwindTheme } from "./theme.types";
+import { TailwindTheme, ThemeColorT } from "./theme.types";
 
 export const themes: {[theme: string]: TailwindTheme} = {
   light: {
@@ -17,20 +17,56 @@ export const themes: {[theme: string]: TailwindTheme} = {
   },
 };
 
-export const themes2 = {
+export const themes2: {[tname: string]: ThemeColorT} = {
   light: {
-    "foreground": "#08003d",
-    "background": "#818181",
     "primary": "#525252",
+    "onprimary": "#F2ECFF",
     "secondary": "#917070",
+    "onsecondary": "#000000",
     "accent": "#A65959",
+    "onaccent": "#FFFFFF",
+    "background": "#818181",
+    "onbackground": "#08003d",  
+  },
+  next: {
+    'primary': "#2C2A27",
+    "onprimary": "#F2ECFF",
+    'secondary': "#CA8E00",
+    "onsecondary": "#000000",
+    'background': "#726552",
+    'onbackground': "#ffffff",
+    'accent': '#AB3710',
+    'onaccent': '#FFFFFF'
+  },
+  color: {
+    'primary': "#509124",
+    "onprimary": "#F2ECFF",
+    'secondary': "#CA8E00",
+    "onsecondary": "#000000",
+    'background': "#EDDB1C",
+    'onbackground': "#000000",
+    'accent': '#A73309',
+    'onaccent': '#FFFFFF'
+  },
+  full: {
+    'primary': "#002db3",
+    "onprimary": "#F2ECFF",
+    'secondary': "#CA8E00",
+    "onsecondary": "#000000",
+    'background': "#ffff00",
+    'onbackground': "#000000",
+    'accent': '#ff0000',
+    'onaccent': '#FFFFFF'
   },
   dark: {
-    "foreground": "#cac2ff",
     "background": "#100f0f",
+    "onbackground": "#FFFFFF",
     "primary": "#adadad",
+    "onprimary": "#F2ECFF",
     "secondary": "#151414",
+    "onsecondary": "#cac2ff",
     "accent": "#7d7878",
+    "onaccent": "#ffffff"
   },
 };
 

@@ -2,16 +2,16 @@
 import { createContext, useContext, useState } from "react";
 import "./App.scss";
 import NavBar from "./components/navbar/navbar";
-import { updateStyledTheme } from "./themes/theme.configuration";
 import { Container } from "./styled.components/container";
-import { Route, Routes, useLocation, useOutlet } from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import { Home } from "./components/home/home";
 import { UserAuth } from "./components/userauth/userauth";
 import { ThemeContext, ThemeProvider } from "styled-components";
-import { GlobalStyles } from "./themes/globla.theme";
+import { GlobalStylesDark,  GlobalStylesLight } from "./themes/globla.theme";
 import  { ThemesList }  from "./components/themesettings/themesettings";
-import { themes } from "./themes/themes.config";
+import { themes2 } from "./themes/themes.config";
 import { useStoreThemeName } from "./themes/theme.store";
+import { ThemeColorT } from "./themes/theme.types";
 
 export const ThemeNameContext = createContext<{themeName: string, setThemeName: (name: string)=>void}>({
   themeName: "light",
@@ -22,7 +22,7 @@ function App() {
 
   const [ storeThemeName, getTheme] = useStoreThemeName('light')
   const [themeName, setThemeName] =  useState(getTheme())
-  const [theme, setTheme] =  useState(updateStyledTheme())
+  const [theme, setTheme] =  useState(themes2)
   const value = {themeName: themeName, setThemeName: (name: string)=>{
     setThemeName(name)
     storeThemeName(name)
@@ -36,7 +36,7 @@ function App() {
     <>
      <ThemeProvider theme={theme[themeName]}>
       <ThemeNameContext.Provider value={value}>
-      <GlobalStyles/>
+      {themeName.includes('dark')? <GlobalStylesDark/> : <GlobalStylesLight/>}
       <NavBar></NavBar>
       
       <Container>
@@ -45,7 +45,7 @@ function App() {
           <Routes>                     
                 <Route path="/" Component={Home}></Route>
                 <Route path="/login" Component={UserAuth}></Route>
-                <Route path="/themes" element={<ThemesList themes={themes}/>}></Route>  
+                <Route path="/themes" element={<ThemesList themes={themes2}/>}></Route>  
           </Routes>      
           
     

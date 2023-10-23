@@ -1,41 +1,15 @@
+import {useContext} from 'react';
 import styled from "styled-components"
-import tw from 'twin.macro';
 import tinycolor from "tinycolor2";
+import { ThemeNameContext } from "../App";
 
-export type ColorT = 'primary' | 'secondary' | 'accent' | 'foreground' | 'background'
+export type ColorT = 'primary' | 'secondary' | 'accent' | 'onprimary' | 'onsecondary' |'onaccent' | 'background' | 'onbackground'
 
 interface ButtonProps {
     width?: number;
     color?: ColorT;
     textColor?: ColorT;
 }
-
-export const ButtonColors = (theme: {[key: string]: {[key: string]: string}}, color = "primary") =>{
-    const btn = {
-        'primary': {
-            background: theme.primary['400'],
-            text: theme.background['50']
-        }, 
-        'secondary': {
-            background: theme.secondary['400'],
-            text: theme.accent['50']
-        },
-        'background': {
-            background: theme.background['400'],
-            text: theme.foreground['100']
-        },
-        'foreground': {
-            background: theme.foreground['400'],
-            text: theme.background['100']
-        },
-        'accent': {
-            background: theme.accent['400'],
-            text: theme.background['100']
-        },
-    }[color]
-    return btn
-} 
-
 export const Button = styled.button<ButtonProps>`
     all: unset;
     text-decoration: none;
@@ -43,19 +17,19 @@ export const Button = styled.button<ButtonProps>`
     padding: 8px;
     width: ${({width})=>(`${width? width : '100' }px`)};
     ${({theme, color})=>{
-    
-    const btnColor = ButtonColors(theme, color)
-
+    const isDark = useContext(ThemeNameContext).themeName.includes('dark')    
+    const clr = color || 'primary'
+    const clrc = 'onaccent' //color? 'on' + color : "onprimary"
     return `
-    background-color: ${btnColor?.background};
-    color: ${btnColor?.text};
+    background-color: ${theme[clr]};
+    color: ${theme[clrc]};
     &:hover:not([disabled]){
-        background-color: ${tinycolor(btnColor?.background).darken(10).toString()};
-        color: ${tinycolor(btnColor?.text).lighten(60).toString()};
+        background-color:  ${isDark? tinycolor(theme[clr]).darken(10).toString()  : tinycolor(theme[clr]).lighten(20).toString()};
+        color: ${tinycolor(theme[clrc]).lighten(45).toString()};
     }
     &:disabled{
-        background-color: ${tinycolor(btnColor?.background).lighten(20).toString()}; 
-        color: ${tinycolor(btnColor?.text).lighten(30).toString()} ;
+        background-color: ${isDark? tinycolor(theme[clr]).darken(30).toString() : tinycolor(theme[clr]).lighten(30).toString()}; 
+        color: ${isDark? tinycolor(theme[clrc]).desaturate(50).darken(50).toString(): tinycolor(theme[clrc]).desaturate(50).lighten(50).toString()} ;
         cursor: not-allowed;
     }`}
     

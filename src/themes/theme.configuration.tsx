@@ -2,6 +2,17 @@ import tinycolor from 'tinycolor2';
 import { Color, TailwindTheme, ThemeT } from './theme.types';
 import {themes, themes2} from './themes.config';
 
+type ShadesT = '50'| 
+'100' |
+'200' |
+'300' |
+'400' |
+'500' |
+'600' |
+'700' |
+'800' |
+'900';
+
 export function computeColorPalette(hex: string): Color[] {
 	return [
 		getColorObject(tinycolor(hex).lighten(45), '50'),
@@ -15,6 +26,25 @@ export function computeColorPalette(hex: string): Color[] {
 		getColorObject(tinycolor(hex).darken(30), '800'),
 		getColorObject(tinycolor(hex).darken(40), '900'),
 	];
+}
+
+export function getShadeColor(hex: string, shade: ShadesT): string{
+	const sh = 	{
+		'50': 45,
+		'100': 40,
+		'200': 30,
+		'300': 20,
+		'400': 10,
+		'500': 0,
+		'600': 10,
+		'700': 20,
+		'800': 30,
+		'900': 40
+	}[shade]
+
+	if(parseInt(shade)<500) return tinycolor(hex).lighten(sh).toString()
+	if(parseInt(shade)>500) return tinycolor(hex).darken(sh).toString()
+	return tinycolor(hex).toString()
 }
 
 export function getColorObject(value: tinycolor.Instance, name: string): Color {
