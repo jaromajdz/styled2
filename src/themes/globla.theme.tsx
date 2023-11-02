@@ -11,7 +11,16 @@ export const GlobalStylesLight = createGlobalStyle`
     font-family: Lato;
     src: url(${Lato}) format('truetype');
     font-weight: 400;
-    font-style: normal;
+    font-style: normal;-moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
 }
 body{
     font-family: 'Lato';
@@ -39,4 +48,14 @@ body{
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
 }`

@@ -12,6 +12,11 @@ import  { ThemesList }  from "./components/themesettings/themesettings";
 import { themes2 } from "./themes/themes.config";
 import { useStoreThemeName } from "./themes/theme.store";
 import { ThemeColorT } from "./themes/theme.types";
+import Moving from "./components/elements/moving/moving";
+import { StyledRange } from "./styled.components/range";
+import { HsvBox } from "./styled.components/hsvbox";
+import { Hub } from "@styled-icons/material";
+import { ColorHue } from "./components/elements/color/color.hue";
 
 export const ThemeNameContext = createContext<{themeName: string, setThemeName: (name: string)=>void}>({
   themeName: "light",
@@ -38,9 +43,9 @@ function App() {
       <ThemeNameContext.Provider value={value}>
       {themeName.includes('dark')? <GlobalStylesDark/> : <GlobalStylesLight/>}
       <NavBar></NavBar>
-      
       <Container>
-    
+      <HsvBox/>
+      <ColorHue/>
       
           <Routes>                     
                 <Route path="/" Component={Home}></Route>

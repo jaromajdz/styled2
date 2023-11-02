@@ -2,6 +2,7 @@ import {
   useState,
   createRef,
   useEffect,
+  useLayoutEffect,
   InputHTMLAttributes,
   ChangeEvent,
   useContext
@@ -63,7 +64,7 @@ export const Input = (props: InputProps) => {
     setSize(getInputFsize());
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const computed = inputRef.current?.getBoundingClientRect();
     setFsize(getInputFsize());
     setHeight(computed?.height);
