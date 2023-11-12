@@ -1,34 +1,109 @@
-import { useEffect, useState } from "react";
-export const Moving = () => {
-  const [left, setLeft] = useState(100);
-  const [top, setTop] = useState(200);
 
+import {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { ColorContext } from "../color/picker";
+export const Moving = ({
+  children 
+}: {
+  children?: React.ReactNode
+}) => {
+
+  const{color, setLuminance, setSaturation} = useContext(ColorContext)
+
+
+  const [left, setLeft] = useState(0);
+  const [top, setTop] = useState(0);
+  
   const [canMove, setCanMove] = useState(false);
+  
+  const [leftPosition, setLeftPos] = useState(0);
+  const [topPosition, setTopPos] = useState(0);
+  
+  const [topMax, setTopMax] = useState(0);
+  const [leftMax, setLeftMax] = useState(0);
 
-  const moveHandler = (e: React.MouseEvent<Element, MouseEvent>) => {
-     if (canMove) {
-      setLeft(left + e.movementX);
-      setTop(top + e.movementY);
+  const outerRef = useRef<HTMLDivElement>(null);
+
+  const moveHandler = (e: React.MouseEvent<Element, MouseEvent>, can =  false) => {
+    if (canMove || can) {
+      e.stopPropagation()
+      const x = e.clientX - leftPosition ;
+      const y = e.clientY - topPosition  ;
+
+      const leftPos = x < 0 ? 0 : x > leftMax  ? leftMax : x 
+      const topPos = y < 0 ? 0 : y  > topMax  ? topMax : y
+
+      setLeft(leftPos);
+      setTop(topPos);
+      
+      setLuminance((topMax - (e.clientY - topPosition))/ (topMax-5) * 100)
+      setSaturation((e.clientX - leftPosition ) /(leftMax-5) * 100)
+    
     }
   };
 
+
+
+  useLayoutEffect(() => {
+    const elParams = outerRef.current?.getBoundingClientRect();
+    setLeftPos((elParams?.left || 0));
+    setTopPos((elParams?.top || 0));
+    
+    setLeft(elParams?.width || 0)
+    setTop( 0 )
+    setTopMax((elParams?.height? elParams?.height - 5  : 0));
+    setLeftMax(elParams?.width? elParams?.width  - 5 :  0);
+  }, []);
+
+  useEffect(() => {
+       
+    const mouseUpHandler = () =>{
+      setCanMove(false)
+  }
+
+    window.addEventListener("mouseup", mouseUpHandler);
+
+    return () => window.removeEventListener("mouseup", mouseUpHandler);
+  }, []);
+
   
+
   return (
-    <div
-      onMouseDown={()=>setCanMove(true)}
-      onMouseUp={() => setCanMove(false)}
-      onMouseMove={(e)=>moveHandler(e)}
-      onMouseOut={() => setCanMove(false)}
-      style={{
-        width: "50px",
-        height: "50px",
-        position: "absolute",
-        left: `${left}px`,
-        top: `${top}px`,
-        backgroundColor: "#0000FF",
-        zIndex: 100,
-      }}
-    ></div>
+    
+      <div
+        ref={outerRef}
+        style={{
+          position: "relative",
+          backgroundColor: "transparent",
+          zIndex: "1100",
+          cursor: "crosshair",
+        }}
+        onMouseMove={moveHandler}
+        onClick={(e)=>moveHandler(e, true)}
+      >
+        <div
+          style={{
+            width: "10px",
+            height: "10px",
+            border: "1px solid white",
+            borderColor: `${canMove? 'red' : 'white'}`,
+            position: "absolute",
+            top: `${top-5}px`,
+            left: `${left-5}px`,
+            zIndex: "1101",
+            padding: "0"
+          }}
+          onMouseDown={() => setCanMove(true)}
+        ></div>
+        {children}
+      </div>
+     
+   
   );
 };
 export default Moving;

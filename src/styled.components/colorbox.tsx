@@ -9,4 +9,5 @@ export const ColorBox =  styled.div<BoxColorT>`
     height: 32px;
     width: 50px;
     background-color: ${({color})=>color};
+    box-shadow: 1px 1px 1px #000000;
 `

@@ -12,5 +12,6 @@ height: 150px;
 background-color: ${({color})=>color || 'red'};
 background-image:  linear-gradient(transparent, black),
     linear-gradient(to right, white, transparent);
-cursor: crosshair;    
+cursor: crosshair;   
+box-shadow: 1px 1px 1px #000000; ;
 `

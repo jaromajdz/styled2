@@ -2,15 +2,17 @@
 import { useContext } from "react"
 import Input from "../input/input"
 import { ColorContext } from "./picker"
+import { ColorBox } from "../../../styled.components/colorbox"
 
 export const ColorValues = () =>{
     
-    const {color, setColor} = useContext(ColorContext) 
+    const {outColor, color, setColor} = useContext(ColorContext) 
     
     return (
         <div style={{display: "flex", alignItems: "center"}}>
-            <div style={{width: "70px", height: "30px", backgroundColor: color}} ></div>
-            <Input value={color} type="text" getValue={setColor}/>
+            <ColorBox color={outColor}/>
+            
+            <Input value={outColor} type="text" getValue={setColor}/>
          </div>
     )
 }

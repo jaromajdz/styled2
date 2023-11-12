@@ -1,6 +1,6 @@
 import styled from "styled-components";
-export const StyledRange = styled.input.attrs({
-    type: "range"
+export const StyledRangeVertical = styled.input.attrs({
+    type: "range", orient: "vertical"
 })`
 --range-height: 16px; 
 --range-bg: #3071af; 
@@ -15,12 +15,10 @@ export const StyledRange = styled.input.attrs({
     #ff00ff,
     #ff0000
   );
-  --range-shadow: 1px 1px 1px #000000;
-  --range-border: border: 0.2px solid #010101;
   --range-thumb-bg: transparent; 
-  --range-thumb-border: 1px solid #000000;
-  --range-thumb-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;  
-  appearance: none;
+  --range-thumb-border: none;//1px solid #000000;
+  --range-shadow: none;//1px 1px 1px #000000, 0px 0px 1px #0d0d0d;  
+  appearance: slider-vertical;
   -webkit-appearance: none;
   margin: 18px 0;
   width: 100%;
@@ -37,7 +35,7 @@ export const StyledRange = styled.input.attrs({
     background: var(--range-bg);
     background-image: var(--range-bg-image);
     border-radius: 1.3px;
-    border: var(--range-border)
+    border: 0.2px solid #010101;
   }
 
  &:focus::-webkit-slider-runnable-track {
@@ -65,7 +63,7 @@ export const StyledRange = styled.input.attrs({
   background: var(--range-bg);
   background-image: var(--range-bg-image);
   border-radius: 1.3px;
-  border: var(--range-border);
+  border: 0.2px solid #010101;
 }
 
 &::-moz-range-thumb {
@@ -89,7 +87,7 @@ export const StyledRange = styled.input.attrs({
 }
 &::-ms-fill-lower {
   background: #2a6495;
-  border: var(--range-border);
+  border: 0.2px solid #010101;
   border-radius: 2.6px;
   box-shadow: var(--range-shadow);
 }
@@ -98,7 +96,7 @@ export const StyledRange = styled.input.attrs({
 }
 &::-ms-fill-upper {
   background: #3071a9;
-  border: var(--range-border);
+  border: 0.2px solid #010101;
   border-radius: 2.6px;
   box-shadow: var(--range-shadow);
 }
