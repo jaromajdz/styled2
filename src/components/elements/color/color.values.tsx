@@ -10,8 +10,7 @@ export const ColorValues = () =>{
     
     return (
         <div style={{display: "flex", alignItems: "center"}}>
-            <ColorBox color={outColor}/>
-            
+            <ColorBox color={outColor} showShadow={true}/>
             <Input value={outColor} type="text" getValue={setColor}/>
          </div>
     )

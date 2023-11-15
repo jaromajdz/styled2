@@ -44,7 +44,6 @@ const ColorPicker = () => {
           );
           const s = Math.round(saturation)
           const v = Math.round(luminance)       
-          console.log(s, v)
           setOutColor(`#${new tinycolor({h: hue, s: s===1? s+1 : s, v: v}).toHex().toString()}`) 
      }, [hue, luminance, saturation] )
 
