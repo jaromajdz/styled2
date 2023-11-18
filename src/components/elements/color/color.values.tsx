@@ -6,12 +6,17 @@ import { ColorBox } from "../../../styled.components/colorbox"
 
 export const ColorValues = () =>{
     
-    const {outColor, color, setColor} = useContext(ColorContext) 
+    const {outColor, tmpColor, setTmpColor, setEditMode} = useContext(ColorContext) 
     
+    const setValue = (val: string) =>{
+        setEditMode(true)
+        setTmpColor(val)
+    }
+
     return (
         <div style={{display: "flex", alignItems: "center"}}>
             <ColorBox color={outColor} showShadow={true}/>
-            <Input value={outColor} type="text" getValue={setColor}/>
+            <Input value={tmpColor} type="text" getValue={setValue}/>
          </div>
     )
 }
