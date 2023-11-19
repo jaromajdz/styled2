@@ -4,6 +4,8 @@ import { ColorHue } from "./color.hue";
 import { ColorValues } from "./color.values";
 import { HSVValueBox } from "./color.hsv";
 import tinycolor from "tinycolor2";
+import { CardActionArea } from "../../../styled.components/card";
+import { Button } from "../../../styled.components/button";
 
 export const ColorContext = createContext({
   color: "#FF0000",
@@ -21,7 +23,7 @@ export const ColorContext = createContext({
   setHue: (hue: number) => {},
 });
 
-const ColorPicker = () => {
+const ColorPicker = ({ color, closeFn }: { color?: string, closeFn: (reason: string, color: string)=>void }) => {
   const [currColor, setCurrColor] = useState("#FF0000");
   const [tmpColor, setTmpColor] = useState("#FF0000");
   const [outColor, setOutColor] = useState("#FF0000");
@@ -46,6 +48,17 @@ const ColorPicker = () => {
     hue: hue,
   };
 
+  useEffect(() => {
+    if (color) {
+      const cl = tinycolor(color).toHsv();
+      setCurrColor(tinycolor("#FF0000").spin(cl.h).toString());
+      setLuminance(cl.v * 100);
+      setSaturation(cl.s * 100);
+      setHue(cl.h);
+      setOutColor(tinycolor(color).toString());
+    }
+  }, []);
+
   const changeLuminance = (lm: number) => {
     setEditMode(false);
     setLuminance(lm);
@@ -60,33 +73,30 @@ const ColorPicker = () => {
     setEditMode(false);
     setHue(h);
   };
-  
-  useEffect(()=>{
-    if(editMode){
-      const cl = tinycolor(tmpColor).toHsv()
-      setCurrColor( 
-        tinycolor("#FF0000")
-        .spin(cl.h)
-        .toString()
-      );
-     setLuminance(cl.v * 100)
-     setSaturation(cl.s * 100) 
-     setHue(cl.h)
-     setOutColor(tinycolor(tmpColor).toString())   
+
+  useEffect(() => {
+    if (editMode) {
+      const cl = tinycolor(tmpColor).toHsv();
+      setCurrColor(tinycolor("#FF0000").spin(cl.h).toString());
+      setLuminance(cl.v * 100);
+      setSaturation(cl.s * 100);
+      setHue(cl.h);
+      setOutColor(tinycolor(tmpColor).toString());
     }
-    
-      
-  },[tmpColor])
-  
+  }, [tmpColor]);
 
   useEffect(() => {
     if (!editMode) {
       setCurrColor(tinycolor("#FF0000").spin(hue).toString());
-      const cl = `#${new tinycolor({ h: hue, s: saturation === 1 ? saturation + 1 : saturation, v: luminance })
-      .toHex()
-      .toString()}`
-      setTmpColor(cl)
-      setOutColor(cl)
+      const cl = `#${new tinycolor({
+        h: hue,
+        s: saturation === 1 ? saturation + 1 : saturation,
+        v: luminance,
+      })
+        .toHex()
+        .toString()}`;
+      setTmpColor(cl);
+      setOutColor(cl);
     }
   }, [hue]);
 
@@ -108,6 +118,18 @@ const ColorPicker = () => {
         <HSVValueBox />
         <ColorValues />
         <ColorHue />
+        <CardActionArea>
+          <Button onClick={() => closeFn("ok", outColor)} color="primary">
+            Ok
+          </Button>
+          <Button
+            onClick={() => closeFn("cancel", outColor)}
+            style={{ marginLeft: "5px" }}
+            color="accent"
+          >
+            Cancel
+          </Button>
+        </CardActionArea>
       </ColorContext.Provider>
     </div>
   );

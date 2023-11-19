@@ -80,7 +80,7 @@ export const Input = (props: InputProps) => {
           ref={inputRef}
           className=""
           placeholder=" "
-          width={"250px"}          
+          width={props.width || "250px"}          
           name={props.label}
           title={props.label}
           

@@ -8,7 +8,8 @@ interface BoxColorT {
 
 export const ColorBox =  styled.div<BoxColorT>`
     height: 32px;
-    width: 50px;
+    min-width: 30px;
+    max-width: 50px;
     background-color: ${({color})=>color};
     box-shadow: ${({showShadow})=>showShadow? `1px 1px 1px #000000` : `none`};
 `

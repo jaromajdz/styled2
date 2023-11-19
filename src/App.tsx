@@ -13,7 +13,8 @@ import { themes2 } from "./themes/themes.config";
 import { useStoreThemeName } from "./themes/theme.store";
 import ColorPicker from "./components/elements/color/picker";
 import { MovingElement } from "./components/elements/moving/moving.class";
-import { PopUp } from "./styled.components/popup";
+import { PopUp, sideEnum } from "./styled.components/popup";
+import ColorButton from "./components/elements/color/color.button";
 
 export const ThemeNameContext = createContext<{themeName: string, setThemeName: (name: string)=>void}>({
   themeName: "light",
@@ -41,10 +42,7 @@ function App() {
       {themeName.includes('dark')? <GlobalStylesDark/> : <GlobalStylesLight/>}
       <NavBar></NavBar>
       <Container>
-      
-
-      
-          <Routes>                     
+      <Routes>                     
                 <Route path="/" Component={Home}></Route>
                 <Route path="/login" Component={UserAuth}></Route>
                 <Route path="/themes" element={<ThemesList themes={themes2}/>}></Route>  

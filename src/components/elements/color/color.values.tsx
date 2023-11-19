@@ -16,7 +16,7 @@ export const ColorValues = () =>{
     return (
         <div style={{display: "flex", alignItems: "center"}}>
             <ColorBox color={outColor} showShadow={true}/>
-            <Input value={tmpColor} type="text" getValue={setValue}/>
+            <Input width="180px" value={tmpColor} type="text" getValue={setValue}/>
          </div>
     )
 }

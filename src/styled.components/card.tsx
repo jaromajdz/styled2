@@ -25,3 +25,7 @@ export const CardHeader = styled.div<CardHeaderT>`
       text-transform: uppercase;
    }
    `
+export const CardActionArea = styled.div`
+   display: flex;
+   justify-content: end;
+`
