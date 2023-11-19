@@ -1,11 +1,24 @@
 import styled from "styled-components"
 import { getShadeColor } from "../themes/theme.configuration";
 
+export enum sideEnum {
+    "topLeft" ="tl",
+    "topRight" ="tr",
+    "bottomRight" = "br",
+    "bottomLeft" = "bl",
+    "leftTop" = "lt",
+    "leftBottom" = "lb",
+    "rightTop" = "rt",
+    "rightBottom" = "rb"
+}
+
 export interface PopUpT {
     width?: number;
     height?: number;
-    side?: string;
+    side?: sideEnum;
 }
+
+
 
 export const PopUp =  styled.div<PopUpT>`
 position: absolute;

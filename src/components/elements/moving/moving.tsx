@@ -58,9 +58,7 @@ export const Moving = ({
     setLeftPos((elParams?.left || 0));
     setTopPos((elParams?.top || 0));
     
-    //setLeft(elParams?.width || 0)
-    //setTop( 0 )
-
+  
     const mt = elParams?.height? elParams?.height  : 0
     const ml = elParams?.width? elParams?.width :  0
 

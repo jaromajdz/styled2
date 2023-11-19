@@ -69,7 +69,6 @@ const ColorPicker = () => {
         .spin(cl.h)
         .toString()
       );
-     console.log('spin', cl.h)
      setLuminance(cl.v * 100)
      setSaturation(cl.s * 100) 
      setHue(cl.h)

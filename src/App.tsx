@@ -41,7 +41,7 @@ function App() {
       {themeName.includes('dark')? <GlobalStylesDark/> : <GlobalStylesLight/>}
       <NavBar></NavBar>
       <Container>
-      <PopUp  width={350} height={290}>   <ColorPicker/> </PopUp>
+      
 
       
           <Routes>                     
